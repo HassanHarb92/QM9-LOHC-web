@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    {% if not is_data_empty %}
+        <table>
+            <tr>
+                <!-- Adjust the headers based on your DataFrame's columns -->
+                <th>Unsaturated SMILE</th>
+                <th>Saturated SMILE</th>
+                <th>Delta H</th>
+                <th>%wt H2</th>
+                <th>Molecule 1</th>
+                <th>Molecule 2</th>
+            </tr>
+            {% for row in data.itertuples() %}
+                <tr>
+                    <td>{{ row.unsat_SMILE }}</td>
+                    <td>{{ row.sat_SMILE }}</td>
+                    <td>{{ row.delta_H }}</td>
+                    <td>{{ row.pH2 }}</td>
+                    <!-- Displaying Images; ensure the column names match -->
+                    <td><img src="data:image/png;base64,{{ row.molecule1_img }}" alt="Molecule 1" /></td>
+                    <td><img src="data:image/png;base64,{{ row.molecule2_img }}" alt="Molecule 2" /></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
+

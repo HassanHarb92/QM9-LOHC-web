@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QM9-LOHC: Query Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    <h3>Number of results: {{ num_results }}</h3>
+
+    {% if not is_data_empty %}
+        <table border="1">
+            <tr>
+                <!-- Adjust the headers based on your DataFrame's columns -->
+                <th>Unsaturated SMILE</th>
+                <th>Saturated SMILE</th>
+                <th>Delta H kJ/mol H<sub>2</sub></th>
+                <th>%wt H<sub>2</sub></th>
+                <th>Molecule 1</th>
+                <th>Molecule 2</th>
+            </tr>
+            {% for row in data.itertuples() %}
+                <tr>
+                    <td>{{ row.unsat_SMILE }}</td>
+                    <td>{{ row.sat_SMILE }}</td>
+                    <td>{{ "{:.1f}".format(row.delta_H) }}</td>
+                    <td>{{ "{:.1f}".format(row.pH2) }}</td>
+                    <!-- Displaying Images; ensure the column names match -->
+                    <td><img src="data:image/png;base64,{{ row.molecule1_img }}" alt="Unsaturated SMILES" style="width:100px; height:100px;"/></td>
+                    <td><img src="data:image/png;base64,{{ row.molecule2_img }}" alt="Saturated SMILES" style="width:100px; height:100px;"/></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
+

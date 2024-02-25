@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QM9-LOHC: Query the Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #666;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>QM9-LOHC: Query the Database</h1>
+    <h4>All Data was generated using G4MP2</h4>
+    <h4>Check out our publication: <a href='https://pubs.rsc.org/en/content/articlehtml/2023/dd/d3dd00123g' target='_blank'> Digital Discovery LOHC paper</a></h4>
+    <h4>Access all QM9-LOHC Dataset here: <a href='https://github.com/orgs/HydrogenStorage/repositories' target='_blank'> GitHub Repository</a><h4>
+    <h2>Query Parameters</h2>
+    <form action="/" method="post">
+        <div>
+            <label for="delta_H_min"><span>&#916;</span>H Minimum:</label>
+            <input type="number" id="delta_H_min" name="delta_H_min" step="any" required>
+        </div>
+        <div>
+            <label for="delta_H_max"><span>&#916;</span>H Maximum:</label>
+            <input type="number" id="delta_H_max" name="delta_H_max" step="any" required>
+        </div>
+        <div>
+            <label for="pH2_min">%wtH<sub>2</sub> Minimum:</label>
+            <input type="number" id="pH2_min" name="pH2_min" step="any" required>
+        </div>
+        <div>
+            <label for="pH2_max">%wtH<sub>2</sub> Maximum:</label>
+            <input type="number" id="pH2_max" name="pH2_max" step="any" required>
+        </div>
+        <div>
+           <label for="num_results">Number of Results:</label>
+           <input type="number" id="num_results" name="num_results" min="1" required><br>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+

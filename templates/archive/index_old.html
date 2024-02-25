@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QM9-LOHC: Query the Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #666;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Query Parameters</h1>
+    <form action="/" method="post">
+        <div>
+            <label for="delta_H_min">Delta H Minimum:</label>
+            <input type="number" id="delta_H_min" name="delta_H_min" step="any" required>
+        </div>
+        <div>
+            <label for="delta_H_max">Delta H Maximum:</label>
+            <input type="number" id="delta_H_max" name="delta_H_max" step="any" required>
+        </div>
+        <div>
+            <label for="pH2_min">pH2 Minimum:</label>
+            <input type="number" id="pH2_min" name="pH2_min" step="any" required>
+        </div>
+        <div>
+            <label for="pH2_max">pH2 Maximum:</label>
+            <input type="number" id="pH2_max" name="pH2_max" step="any" required>
+        </div>
+        <div>
+            <label for="molar_mass_min">Molar Mass Minimum:</label>
+            <input type="number" id="molar_mass_min" name="molar_mass_min" step="any" required>
+        </div>
+        <div>
+            <label for="molar_mass_max">Molar Mass Maximum:</label>
+            <input type="number" id="molar_mass_max" name="molar_mass_max" step="any" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
