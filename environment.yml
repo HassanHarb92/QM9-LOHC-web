@@ -1,3 +1,4 @@
+name: qm9-lohc-env
 channels:
   - conda-forge
 dependencies:

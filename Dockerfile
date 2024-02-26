@@ -1,15 +1,24 @@
+# Use an official Miniconda image as a parent image
 FROM continuumio/miniconda3
 
-# Copy your application code and environment.yml to the container
-COPY . /app
+# Set the working directory in the container
 WORKDIR /app
 
-# Install your Conda environment
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in environment.yml
 RUN conda env create -f environment.yml
 
 # Make RUN commands use the new environment
-SHELL ["conda", "run", "-n", "your_env_name", "/bin/bash", "-c"]
+SHELL ["conda", "run", "-n", "qm9-lohc-env", "/bin/bash", "-c"]
 
-# The command to run your application
-CMD conda run --no-capture-output -n your_env_name python app.py
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Define environment variable
+ENV PORT=5000
+
+# Run app.py when the container launches
+CMD conda run --no-capture-output -n qm9-lohc-env python app.py
 
