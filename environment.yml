@@ -1,8 +1,7 @@
-name: myenv
 channels:
   - conda-forge
 dependencies:
-  - python=3.8  # Use your desired Python version
+  - python=3.8  # Specify your Python version
   - flask
   - gunicorn
   - rdkit
