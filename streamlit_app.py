@@ -30,8 +30,8 @@ st.title('QM9-LOHC Dataset Query')
 # User inputs for filtering
 delta_H_min = st.number_input('Delta H Min', value=0)# float(QM9_G4MP2_all['delta_H'].min()))
 delta_H_max = st.number_input('Delta H Max', value=0)#float(QM9_G4MP2_all['delta_H'].max()))
-pH2_min = st.number_input('%H2 (by wt) Min', value=0)float(QM9_G4MP2_all['pH2'].min()))
-pH2_max = st.number_input('%H2 (by wt) Max', value=0)float(QM9_G4MP2_all['pH2'].max()))
+pH2_min = st.number_input('%H2 (by wt) Min', value=0)#float(QM9_G4MP2_all['pH2'].min()))
+pH2_max = st.number_input('%H2 (by wt) Max', value=0)#float(QM9_G4MP2_all['pH2'].max()))
 num_results = st.number_input('Number of Results', value=10, min_value=1, max_value=len(QM9_G4MP2_all))
 
 if st.button('Submit'):
