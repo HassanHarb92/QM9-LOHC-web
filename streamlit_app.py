@@ -27,15 +27,33 @@ def mol_to_image_base64(smiles):
 #st.title('My Flask App Converted to Streamlit')
 #st.title('QM9-LOHC Dataset Query')
 
+#image_path = 'Logo.png'
+#st.image(image_path, caption="",width=250)# use_column_width=True)
+#st.title('QM9-LOHC Dataset Query')
+
+# Path to your image
 image_path = 'Logo.png'
-st.image(image_path, caption="",width=250)# use_column_width=True)
-st.title('QM9-LOHC Dataset Query')
+
+# Create a layout with 2 columns
+# Adjust the 'width' argument to control the space allocation
+col1, col2 = st.columns([1, 3])
+
+# First column for the image
+with col1:
+    st.image(image_path, width=190)  # Adjust width as needed
+
+# Second column for the title
+with col2:
+    st.markdown("<h1 style='text-align: left; color: black;'>QM9-LOHC Dataset Query</h1>", unsafe_allow_html=True)
+
+# Rest of your app goes here
+
 
 # User inputs for filtering
-delta_H_min = st.number_input('Delta H Min', value=0)# float(QM9_G4MP2_all['delta_H'].min()))
-delta_H_max = st.number_input('Delta H Max', value=0)#float(QM9_G4MP2_all['delta_H'].max()))
-pH2_min = st.number_input('%H2 (by wt) Min', value=0)#float(QM9_G4MP2_all['pH2'].min()))
-pH2_max = st.number_input('%H2 (by wt) Max', value=0)#float(QM9_G4MP2_all['pH2'].max()))
+delta_H_min = st.number_input('Delta H Min', value=40)# float(QM9_G4MP2_all['delta_H'].min()))
+delta_H_max = st.number_input('Delta H Max', value=70)#float(QM9_G4MP2_all['delta_H'].max()))
+pH2_min = st.number_input('%H2 (by wt) Min', value=5.5)#float(QM9_G4MP2_all['pH2'].min()))
+pH2_max = st.number_input('%H2 (by wt) Max', value=7)#float(QM9_G4MP2_all['pH2'].max()))
 num_results = st.number_input('Number of Results', value=10, min_value=1, max_value=len(QM9_G4MP2_all))
 
 if st.button('Submit'):
