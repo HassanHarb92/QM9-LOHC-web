@@ -25,12 +25,11 @@ def mol_to_image_base64(smiles):
         return None
 
 #st.title('My Flask App Converted to Streamlit')
-st.title('QM9-LOHC Dataset Query')
+#st.title('QM9-LOHC Dataset Query')
 
 image_path = 'Logo.png'
-st.image(image_path, caption="hello", use_column_width=True)
-
-
+st.image(image_path, caption="",width=250)# use_column_width=True)
+st.title('QM9-LOHC Dataset Query')
 
 # User inputs for filtering
 delta_H_min = st.number_input('Delta H Min', value=0)# float(QM9_G4MP2_all['delta_H'].min()))
