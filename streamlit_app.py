@@ -1,28 +1,32 @@
-
 import streamlit as st
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Draw
-import numpy as np
-import base64
 from PIL import Image
 import io
+import base64
 
-# Load the dataset
-# QM9_G4MP2_all = pd.read_csv('QM9_G4MP2_all.csv')
+# Assuming 'G4MP2_set2.csv' is present in the same directory as your Streamlit app
 QM9_G4MP2_all = pd.read_csv('G4MP2_set2.csv')
 
 # Convert molecule images to base64 for embedding
 def mol_to_image_base64(smiles):
-    mol = Chem.MolFromSmiles(smiles)
-    img = Draw.MolToImage(mol)
-    output = io.BytesIO()
-    img.save(output, format='PNG')
-    return base64.b64encode(output.getvalue()).decode('utf-8')
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is not None:
+            img = Draw.MolToImage(mol)
+            output = io.BytesIO()
+            img.save(output, format='PNG')
+            return base64.b64encode(output.getvalue()).decode('utf-8')
+        else:
+            return None
+    except Exception as e:
+        st.error(f"Error generating image for SMILES: {smiles} | Error: {str(e)}")
+        return None
 
-# Streamlit app
 st.title('My Flask App Converted to Streamlit')
 
+# User inputs for filtering
 delta_H_min = st.number_input('Delta H Min', value=float(QM9_G4MP2_all['delta_H'].min()))
 delta_H_max = st.number_input('Delta H Max', value=float(QM9_G4MP2_all['delta_H'].max()))
 pH2_min = st.number_input('pH2 Min', value=float(QM9_G4MP2_all['pH2'].min()))
@@ -43,10 +47,13 @@ if st.button('Submit'):
 
     st.write(filtered_data[['unsat_SMILE', 'sat_SMILE', 'molecule1_img', 'molecule2_img']])
 
+    # Displaying images
     for index, row in filtered_data.iterrows():
         col1, col2 = st.columns(2)
         with col1:
-            st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule1_img']))), caption="Unsaturated")
+            if row['molecule1_img'] is not None:
+                st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule1_img']))), caption="Unsaturated")
         with col2:
-            st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule2_img']))), caption="Saturated")
+            if row['molecule2_img'] is not None:
+                st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule2_img']))), caption="Saturated")
 
