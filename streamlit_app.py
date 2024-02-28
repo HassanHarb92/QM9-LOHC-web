@@ -69,7 +69,7 @@ if st.button('Submit'):
     filtered_data['molecule1_img'] = filtered_data['unsat_SMILE'].apply(mol_to_image_base64)
     filtered_data['molecule2_img'] = filtered_data['sat_SMILE'].apply(mol_to_image_base64)
 
-    st.write(filtered_data[['unsat_SMILE', 'sat_SMILE','pH2']])#, 'molecule1_img', 'molecule2_img']])
+    st.write(filtered_data[['unsat_SMILE', 'sat_SMILE','pH2','delta_H']])#, 'molecule1_img', 'molecule2_img']])
 
     # Displaying images
     for index, row in filtered_data.iterrows():
