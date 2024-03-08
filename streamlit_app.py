@@ -56,7 +56,6 @@ delta_H_max = st.number_input('Delta H Max', value=70)#float(QM9_G4MP2_all['delt
 pH2_min = st.number_input('%H2 (by wt) Min', value=5.5)#float(QM9_G4MP2_all['pH2'].min()))
 pH2_max = st.number_input('%H2 (by wt) Max', value=7)#float(QM9_G4MP2_all['pH2'].max()))
 num_results = st.number_input('Number of Results', value=10, min_value=1, max_value=len(QM9_G4MP2_all))
-
 if st.button('Submit'):
     filtered_data = QM9_G4MP2_all[
         (QM9_G4MP2_all['delta_H'].between(delta_H_min, delta_H_max)) &
@@ -66,18 +65,20 @@ if st.button('Submit'):
     if len(filtered_data) > num_results:
         filtered_data = filtered_data.sample(n=num_results)
 
-    filtered_data['molecule1_img'] = filtered_data['unsat_SMILE'].apply(mol_to_image_base64)
-    filtered_data['molecule2_img'] = filtered_data['sat_SMILE'].apply(mol_to_image_base64)
+    # Ensure molecule image columns are created and populated
+    if 'molecule1_img' not in filtered_data or 'molecule2_img' not in filtered_data:
+        filtered_data['molecule1_img'] = filtered_data['unsat_SMILE'].apply(mol_to_image_base64)
+        filtered_data['molecule2_img'] = filtered_data['sat_SMILE'].apply(mol_to_image_base64)
 
-    st.write(filtered_data[['unsat_SMILE', 'sat_SMILE','pH2','delta_H']])#, 'molecule1_img', 'molecule2_img']])
-
-    # Displaying images
-    for index, row in filtered_data.iterrows():
+    for _, row in filtered_data.iterrows():
         col1, col2 = st.columns(2)
         with col1:
+            rounded = round(row['delta_H'],2)
+            st.metric(label="∆H", value=f"{rounded} kJ/mol H₂")
             if row['molecule1_img'] is not None:
-                st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule1_img']))), caption="Unsaturated")
+                st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule1_img']))), caption=row['unsat_SMILE'])
         with col2:
+            st.metric(label="pH2", value=f"{row['pH2']} %")
             if row['molecule2_img'] is not None:
-                st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule2_img']))), caption="Saturated")
-
+                st.image(Image.open(io.BytesIO(base64.b64decode(row['molecule2_img']))), caption=row['sat_SMILE'])
+        st.markdown("""---""")
