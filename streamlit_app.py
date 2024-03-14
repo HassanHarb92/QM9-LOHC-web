@@ -46,7 +46,7 @@ with col1:
 
 # Second column for the title
 with col2:
-    st.markdown("<h1 style='text-align: left; color: black;'>QM9-LOHC Dataset Query</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: left; color: black;'>QM9-LOHC Dataset Query test</h1>", unsafe_allow_html=True)
     st.markdown("<a href='https://doi.org/10.1039/D3DD00123G' target='_blank'>Check out our Digital Discovery paper</a>", unsafe_allow_html=True)
     st.markdown("<a href='https://github.com/HydrogenStorage/'>Access our datasets and tools on Github</a>",unsafe_allow_html=True)
 # Rest of your app goes here
